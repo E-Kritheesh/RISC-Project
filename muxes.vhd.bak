@@ -1,0 +1,143 @@
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+
+package muxes is
+	component mux8 is port(sel1: in std_logic_vector(2 downto 0); inp1, inp2, inp3, inp4, inp5, inp6, inp7, inp8: in std_logic_vector(15 downto 0); opt: out std_logic_vector(15 downto 0));
+	end component;
+--	component mux4 is port(sel2: in std_logic_vector(1 downto 0); rg1,rg2,rg3,rg4: in std_logic_vector(15 downto 0); opt: out std_logic_vector(15 downto 0));
+--	end component;
+--	component mux2 is port(sel3: in std_logic; i1,i2: in std_logic_vector(15 downto 0); opt: out std_logic_vector(15 downto 0));
+--	end component;
+--	component demux2 is port(sel4: in std_logic; i: in std_logic_vector(15 downto 0); o1, o2: out std_logic_vector(15 downto 0));
+--	end component;
+--	component demux4 is port(sel5: in std_logic_vector(1 downto 0); rg: in std_logic_vector(15 downto 0); opt1, opt2, opt3, opt4: out std_logic_vector(15 downto 0));
+--	end component;
+end package;
+
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity mux8 is
+	port(sel1: in std_logic_vector(2 downto 0);
+		  inp1, inp2, inp3, inp4, inp5, inp6, inp7, inp8: in std_logic_vector(15 downto 0);
+		  opt: out std_logic_vector(15 downto 0));
+end entity;
+
+architecture mux8_arch of mux8 is
+begin
+	process (sel1, inp1, inp2, inp3, inp4, inp5, inp6, inp7, inp8)
+	begin
+		case sel1 is
+			when "000"=>
+				opt <= inp1;
+			when "001"=>
+				opt <= inp2;
+			when "010"=>
+				opt <= inp3;
+			when "011"=>
+				opt <= inp4;
+			when "100"=>
+				opt <= inp5;
+			when "101"=>
+				opt <= inp6;
+			when "110"=>
+				opt <= inp7;
+			when others=>
+				opt <= inp8;
+		end case;
+	end process;
+end architecture;
+--
+--library ieee;
+--use ieee.std_logic_1164.all;
+--
+--entity mux4 is
+--	port(sel2: in std_logic_vector(1 downto 0);
+--		  rg1,rg2,rg3,rg4: in std_logic_vector(15 downto 0);
+--		  opt: out std_logic_vector(15 downto 0));
+--end entity;
+--
+--architecture mux4_arch of mux4 is
+--begin
+--	process (sel2)
+--	begin
+--		case sel2 is
+--			when "00"=>
+--				opt <= rg1;
+--			when "01"=>
+--				opt <= rg2;
+--			when "10"=>
+--				opt <= rg3;
+--			when others=>
+--				opt <= rg4;
+--			end case;
+--	end process;
+--end architecture;
+--
+--library ieee;
+--use ieee.std_logic_1164.all;
+--
+--entity mux2 is
+--	port(sel3: in std_logic;
+--		  i1,i2: in std_logic_vector(15 downto 0);
+--		  opt: out std_logic_vector(15 downto 0));
+--end entity;
+--
+--architecture mux2_arch of mux2 is
+--begin
+--	process (sel3)
+--	begin
+--		if sel3 = '0' then
+--			opt <= i1;
+--		else
+--			opt <= i2;
+--		end if;
+--	end process;
+--end architecture;
+--
+--library ieee;
+--use ieee.std_logic_1164.all;
+--
+--entity demux2 is
+--	port(sel4: in std_logic;
+--		  i: in std_logic_vector(15 downto 0);
+--		  o1, o2: out std_logic_vector(15 downto 0));
+--end entity;
+--
+--architecture demux2_arch of demux2 is
+--begin
+--	process (sel4)
+--	begin
+--		if sel4 = '0' then
+--			o1<=i;
+--		else
+--			o2<=i;
+--		end if;
+--	end process;
+--end architecture;
+--
+--library ieee;
+--use ieee.std_logic_1164.all;
+--
+--entity demux4 is
+--	port(sel5: in std_logic_vector(1 downto 0);
+--		  rg: in std_logic_vector(15 downto 0);
+--		  opt1, opt2, opt3, opt4: out std_logic_vector(15 downto 0));
+--end entity;
+--
+--architecture demux4_arch of demux4 is
+--begin
+--	process (sel5)
+--	begin
+--		if sel5="00" then
+--			opt1<=rg;
+--		elsif sel5="01" then
+--			opt2<=rg;
+--		elsif sel5="10" then
+--			opt3<=rg;
+--		else
+--			opt4<=rg;
+--		end if;
+--	end process;
+--end architecture;
